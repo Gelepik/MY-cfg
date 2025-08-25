@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyprland Binds</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8548f5;
+            --primary-dark: #6a30d4;
+            --accent: #c01431;
+            --accent-light: #e54562;
+            --background: #121212;
+            --surface: #1e1e1e;
+            --surface-light: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-glow: rgba(133, 72, 245, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(133, 72, 245, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(192, 20, 49, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(66, 153, 225, 0.1) 0%, transparent 25%);
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.8));
+            backdrop-filter: blur(10px);
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(133, 72, 245, 0.4);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .bind-card {
+            background: linear-gradient(145deg, var(--surface), var(--surface-light));
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .bind-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(133, 72, 245, 0.05), rgba(192, 20, 49, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .bind-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--primary);
+        }
+
+        .bind-card:hover::before {
+            opacity: 1;
+        }
+
+        .bind-key {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(192, 20, 49, 0.5);
+        }
+
+        .bind-action {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .category-title {
+            grid-column: 1 / -1;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary);
+            color: var(--text-primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+            background: rgba(17, 17, 17, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                padding: 0 1.5rem;
+            }
+            
+            .bind-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Анимация появления карточек */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bind-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .bind-card:nth-child(1) { animation-delay: 0.1s; }
+        .bind-card:nth-child(2) { animation-delay: 0.2s; }
+        .bind-card:nth-child(3) { animation-delay: 0.3s; }
+        .bind-card:nth-child(4) { animation-delay: 0.4s; }
+        .bind-card:nth-child(5) { animation-delay: 0.5s; }
+        .bind-card:nth-child(6) { animation-delay: 0.6s; }
+        .bind-card:nth-child(7) { animation-delay: 0.7s; }
+        .bind-card:nth-child(8) { animation-delay: 0.8s; }
+        .bind-card:nth-child(9) { animation-delay: 0.9s; }
+        .bind-card:nth-child(10) { animation-delay: 1.0s; }
+        .bind-card:nth-child(11) { animation-delay: 1.1s; }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <header>
+        <h1>Hyprland Binds</h1>
+        <p>Горячие клавиши для эффективной работы в оконном менеджере Hyprland</p>
+    </header>
+
+    <div class="container">
+        <div class="category-title">Основные приложения</div>
+        
+        <div class="bind-card">
+            <div class="bind-key">Win + Q</div>
+            <div class="bind-action">Открыть терминал</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + E</div>
+            <div class="bind-action">Открыть файловый менеджер</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + R</div>
+            <div class="bind-action">Открыть меню приложений</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + B</div>
+            <div class="bind-action">Открыть Firefox</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + T</div>
+            <div class="bind-action">Открыть Telegram</div>
+        </div>
+        
+        <div class="category-title">Управление окнами</div>
+        
+        <div class="bind-card">
+            <div class="bind-key">Win + C</div>
+            <div class="bind-action">Закрыть активное окно</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + D</div>
+            <div class="bind-action">Переключить плавающее окно</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + F</div>
+            <div class="bind-action">Переключить полноэкранный режим</div>
+        </div>
+        
+        <div class="category-title">Утилиты</div>
+        
+        <div class="bind-card">
+            <div class="bind-key">Win + P</div>
+            <div class="bind-action">Сделать скриншот выбранной области</div>
+        </div>
+        
+        <div class="category-title">Игры и скрипты</div>
+        
+        <div class="bind-card">
+            <div class="bind-key">Win + 1</div>
+            <div class="bind-action">Открыть подсказки</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + 8</div>
+            <div class="bind-action">Запустить Osu</div>
+        </div>
+        <div class="bind-card">
+            <div class="bind-key">Win + 9</div>
+            <div class="bind-action">Запустить Steam</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Hyprland Binds | Сделано с ❤️ для сообщества Linux</p>
+    </footer>
+</body>
+</html>
