@@ -72,12 +72,7 @@ yay -S eww
 
 
 
-#press Crtl+F write "Gelepa"
-
-
-
-
-#and change to your name
+#press Crtl+F write "Gelepa" and change to your name
 
 
 
