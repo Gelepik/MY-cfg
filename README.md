@@ -1,4 +1,8 @@
 sudo pacman -Syu #update packages first
+
+
+
+
 sudo pacman -S kitty #Kitty installation
 sudo pacman -S wofi #wofi installation
 
