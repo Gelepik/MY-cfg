@@ -1,0 +1,177 @@
+INSTALL — MY-cfg for Arch Linux + Hyprland
+==================================================
+
+This document provides a clean, copy‑pasteable, step‑by‑step guide to install the MY-cfg
+(Hyprland + eww + wofi + kitty) configuration on Arch Linux.
+
+Tested on: Arch Linux (Wayland). Assumes a fresh user profile with sudo rights.
+
+
+0) Notes & backup
+-----------------
+• These commands install required packages, fonts, icons, and copy the repo’s configs into ~/.config.
+• If you already have configs for hypr/eww/wofi/kitty, BACK THEM UP first:
+
+  mkdir -p ~/backup-configs && \
+  for d in hypr eww wofi kitty; do \
+    [ -d "$HOME/.config/$d" ] && mv "$HOME/.config/$d" "$HOME/backup-configs/${d}-$(date +%F-%H%M%S)"; \
+  done
+
+
+1) Update system & base tools
+-----------------------------
+sudo pacman -Syu
+sudo pacman -S --needed base-devel git curl
+
+
+2) Install Hyprland stack and tools
+-----------------------------------
+# Hyprland compositor and useful Wayland utilities
+sudo pacman -S --needed hyprland xdg-desktop-portal-hyprland wl-clipboard \
+  hyprpaper hypridle swaybg grim slurp
+
+# Polkit agent (choose ONE you prefer). Example: polkit-gnome
+sudo pacman -S --needed polkit-gnome
+
+# Optional but recommended for audio
+sudo pacman -S --needed pipewire wireplumber pipewire-alsa pipewire-pulse pavucontrol
+
+
+3) Install apps used by this config
+-----------------------------------
+# Terminal + app launcher
+sudo pacman -S --needed kitty wofi
+
+# AUR helper (yay) to install eww + Nerd Fonts
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+
+# eww (widgets/panels)
+yay -S --needed eww
+
+
+4) Fonts & icon themes (to avoid missing glyphs)
+------------------------------------------------
+# Core text + emoji + CJK (optional but recommended for complete coverage)
+sudo pacman -S --needed noto-fonts noto-fonts-emoji noto-fonts-cjk
+
+# Icons and symbol fonts
+sudo pacman -S --needed ttf-font-awesome papirus-icon-theme
+
+# Nerd Fonts (commonly used by rice/configs). Install at least one full Nerd Font:
+# (JetBrainsMono Nerd Font is a good default; add others if you wish)
+yay -S --needed ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
+
+
+5) Clone MY-cfg and install configs
+-----------------------------------
+# Clone the repo (or update if you already have it)
+git clone https://github.com/Gelepik/MY-cfg.git
+cd MY-cfg
+
+# Copy configs into ~/.config (create dirs if needed)
+mkdir -p ~/.config
+cp -r hypr ~/.config/
+cp -r eww ~/.config/
+cp -r wofi ~/.config/
+cp -r kitty ~/.config/
+
+# Ensure correct ownership/permissions (in case you copied as root by accident)
+chown -R $USER:$USER ~/.config/hypr ~/.config/eww ~/.config/wofi ~/.config/kitty
+
+
+6) Wallpaper, avatar, and name in eww
+-------------------------------------
+# Wallpaper:
+# Put your wallpaper image into:  ~/Pictures/winda.jpg
+# (Create the directory if it doesn’t exist)
+mkdir -p ~/Pictures
+# Example: if your image is /path/to/your_wallpaper.jpg
+# cp /path/to/your_wallpaper.jpg ~/Pictures/winda.jpg
+
+# Avatar (used by eww):
+# Replace the file at:  ~/.config/eww/Monasm.jpg
+# with your own image, but keep the exact same file name: Monasm.jpg
+
+# Display name in the eww menu:
+# Edit ~/.config/eww/eww.yuck, press Ctrl+F and find “Gelepa”, change it to your name.
+# Example (using sed; make a backup first):
+cp ~/.config/eww/eww.yuck ~/.config/eww/eww.yuck.bak 2>/dev/null || true
+sed -i 's/Gelepa/YourNameHere/g' ~/.config/eww/eww.yuck
+
+
+7) Startpage (browser home tab)
+-------------------------------
+# The repository includes: tartarus-startpage-master/index.html
+# Option A: open it directly from the repo folder in your browser.
+# Option B (recommended): copy it into a dedicated config location, then set your browser’s homepage to that file.
+mkdir -p ~/.config/startpage
+cp -f tartarus-startpage-master/index.html ~/.config/startpage/index.html
+
+# Then set your browser’s homepage/start page to:
+# file:///home/$USER/.config/startpage/index.html
+
+
+8) Autostart eww and wallpaper in Hyprland
+------------------------------------------
+# In ~/.config/hypr/hyprland.conf add (or ensure) lines like these in the 'exec-once' section:
+
+# --- begin example ---
+# Use hyprpaper for the wallpaper (uses the winda.jpg we placed earlier)
+# Make sure ~/.config/hypr/hyprpaper.conf exists and points to your wallpaper:
+#   preload = ~/Pictures/winda.jpg
+#   wallpaper = ,~/Pictures/winda.jpg
+# Then autostart hyprpaper and eww:
+# exec-once = hyprpaper &
+# exec-once = eww daemon && eww open <YOUR_WIDGET_NAME_IF_DEFINED>
+# --- end example ---
+
+# If your hypr config already contains exec-once lines, just add/merge these as needed.
+
+
+9) First run
+------------
+# Log out to a TTY, log in and start Hyprland (if you don’t use a display manager):
+Hyprland
+
+# Or select Hyprland from your display manager (SDDM/GDM/etc.) session list.
+
+
+10) Useful troubleshooting tips
+-------------------------------
+• If eww fails to launch, run it from a terminal to see errors:
+  eww daemon
+  eww open <widget_name>
+
+• If you see missing icons/squares, ensure the fonts in step 4 are installed, then re-login.
+
+• For wallpaper issues, verify ~/.config/hypr/hyprpaper.conf is valid and the image path exists.
+
+• For portal issues (screensharing, file pickers), verify xdg-desktop-portal-hyprland is installed
+  and no conflicting portal backends are running.
+
+
+Appendix: One-liner quick install (expert use)
+----------------------------------------------
+# WARNING: modifies your configs, installs yay and lots of packages in one go.
+# Read the steps above first, then run at your own risk.
+
+sudo pacman -Syu --noconfirm && \
+sudo pacman -S --needed --noconfirm base-devel git curl hyprland xdg-desktop-portal-hyprland \
+  wl-clipboard hyprpaper hypridle swaybg grim slurp polkit-gnome pipewire wireplumber \
+  pipewire-alsa pipewire-pulse pavucontrol kitty wofi noto-fonts noto-fonts-emoji \
+  noto-fonts-cjk ttf-font-awesome papirus-icon-theme && \
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && \
+yay -S --needed --noconfirm eww ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono && \
+git clone https://github.com/Gelepik/MY-cfg.git && cd MY-cfg && \
+mkdir -p ~/.config && \
+for d in hypr eww wofi kitty; do cp -r "$d" ~/.config/; done && \
+mkdir -p ~/Pictures ~/.config/startpage && \
+# Place your wallpaper at ~/Pictures/winda.jpg manually, then:
+cp -f tartarus-startpage-master/index.html ~/.config/startpage/index.html && \
+chown -R $USER:$USER ~/.config/hypr ~/.config/eww ~/.config/wofi ~/.config/kitty
+
+# After this, edit ~/.config/eww/eww.yuck to change “Gelepa” to your name, replace Monasm.jpg,
+# and configure hyprpaper/eww autostart inside ~/.config/hypr/hyprland.conf.
