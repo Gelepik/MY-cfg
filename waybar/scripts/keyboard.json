@@ -1,0 +1,10 @@
+"keyboard": {
+    "format": "{layout}",
+    "format-icons": {
+        "us": "US",
+        "ru": "RU",
+        "ua": "UA"
+        // добавьте другие раскладки по необходимости
+    },
+    "tooltip": false
+},

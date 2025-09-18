@@ -1,0 +1,103 @@
+{
+  "layer": "top",
+  "height": 37,
+  "spacing": 5,
+  "output": "HDMI-A-1",
+  "modules-left": ["image", "hyprland/workspaces", "custom/spotify"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "tray",
+    "battery",
+    "custom/power"
+  ],
+
+  "hyprland/window": {
+    "separate-outputs": false
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "disable-scroll": false,
+    "active-only": false,
+    "sort-by-number": true,
+    "format-icons": {
+      "1": "󰌽",
+      "2": "󰮯",
+      "3": "",
+      "4": "󰊤",
+      "5": "󰣇",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "1",
+      "11": "2",
+      "12": "3",
+      "13": "4",
+      "14": "5",
+      "15": "6",
+      "16": "7",
+      "17": "8",
+      "18": "9",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+  "persistent-workspaces": {
+    "1": [], "2": [], "3": [], "4": [], "5": [],
+    "6": [], "7": [], "8": [], "9": [],
+    "10": [], "11": [], "12": [], "13": [], "14": [],
+    "15": [], "16": [], "17": [], "18": []
+  }
+  },
+
+"keyboard": {
+  "format": "{layout}",
+  "format-icons": {
+    "us": "ENG",
+    "ru": "RU"
+  },
+  "tooltip": false,
+  "interval": 1
+},
+
+  "tray": {
+    "spacing": 10
+  },
+
+  "clock": {
+    "tooltip-format": "{:%A, %B %d, %Y}",
+    "format": "{:%I:%M}"
+  },
+
+  "battery": {
+    "format": "{icon}",
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "format-charging": "󰂄 {capacity}%",
+    "format-warning": "󰂃 {capacity}%",
+    "tooltip-format": "{capacity}%"
+  },
+
+  "custom/power": {
+    "format": "󰐥",
+    "on-click": "wlogout"
+  },
+
+  "image": {
+    "path": "/home/gelepa/.config/waybar/nix.svg",
+    "size": 20,
+    "interval": 5,
+    "on-click": "brave https://search.nixos.org/packages",
+    "monitor": "HDMI-A-1"
+  },
+
+  "custom/weather": {
+    "exec": "~/.config/scripts/weather",
+    "interval": 3600,
+    "format": "{}",
+    "return-type": "text"
+  }
+}
+
