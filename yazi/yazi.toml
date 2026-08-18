@@ -1,0 +1,86 @@
+[mgr]
+show_hidden = true
+[opener]
+edit = [
+    { run = 'code "$@"', block = true, for = "unix" }
+]
+# ==============================================================================
+# ==============================================================================
+
+[manager]
+# Рамки окон (активное и неактивные)
+border_style = { fg = "#7aa2f7" }
+border_symbol = "│"
+
+# Строка, на которой сейчас находится курсор
+hovered = { bg = "#2e3c64", fg = "#ffffff", bold = true }
+
+# Файлы, которые вы выделили (например, через Space для копирования)
+selected = { bg = "#3d59a1", fg = "#ff9e64", underline = true }
+
+[status]
+# Строка состояния в самом низу
+separator_style = { fg = "#3b4261", bg = "#16161e" }
+mode_normal = { bg = "#7aa2f7", fg = "#16161e", bold = true }
+mode_select = { bg = "#b4f9a8", fg = "#16161e", bold = true }
+mode_unset  = { bg = "#f7768e", fg = "#16161e", bold = true }
+
+[mode]
+# Индикаторы режимов в левом нижнем углу
+normal_main = { bg = "#7aa2f7", fg = "#16161e", bold = true }
+normal_alt  = { bg = "#3b4261", fg = "#7aa2f7" }
+select_main = { bg = "#b4f9a8", fg = "#16161e", bold = true }
+select_alt  = { bg = "#3b4261", fg = "#b4f9a8" }
+unset_main  = { bg = "#f7768e", fg = "#16161e", bold = true }
+unset_alt   = { bg = "#3b4261", fg = "#f7768e" }
+
+[filetype]
+# Цвета для разных типов файлов и папок
+rules = [
+    # Папки будут синими и жирными
+    { is = "folder", fg = "#7aa2f7", bold = true },
+    
+    # Скрытые файлы (актуально для вашего show_hidden = true) — приглушенный серый
+    { name = ".*", fg = "#565f89" },
+    
+    # Исполняемые файлы (скрипты, программы) — зеленые
+    { is = "exec", fg = "#9ece6a" },
+    
+    # Архивы — оранжевые
+    { name = "*.zip", fg = "#ff9e64" },
+    { name = "*.tar.*", fg = "#ff9e64" },
+    { name = "*.gz", fg = "#ff9e64" },
+    { name = "*.rar", fg = "#ff9e64" },
+    { name = "*.7z", fg = "#ff9e64" },
+    
+    # Документы и медиа
+    { name = "*.md", fg = "#00dfa2" },
+    { name = "*.txt", fg = "#c0caf5" },
+    { name = "*.json", fg = "#e0af68" },
+    { name = "*.toml", fg = "#e0af68" }
+]
+
+[input]
+# Окно ввода (например, переименование или создание файла)
+border = { fg = "#7aa2f7" }
+title  = { fg = "#7aa2f7" }
+value  = { fg = "#c0caf5" }
+selected = { bg = "#3d59a1" }
+
+[select]
+# Меню выбора вариантов
+border = { fg = "#7aa2f7" }
+active = { fg = "#ff9e64", bold = true }
+inactive = { fg = "#c0caf5" }
+
+[completion]
+# Окно автодополнения команд
+border = { fg = "#7aa2f7" }
+active = { bg = "#2e3c64", fg = "#ffffff" }
+inactive = { fg = "#c0caf5" }
+
+[help]
+# Окно справки по горячим клавишам
+on = { fg = "#ff9e64" }
+run = { fg = "#7aa2f7" }
+desc = { fg = "#c0caf5" }
