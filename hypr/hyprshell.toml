@@ -1,0 +1,11 @@
+[general]
+layout = "fancy"
+
+[colors]
+background = "#1e1e2e"
+background_alt = "#11111b"
+foreground = "#cdd6f4"
+accent = "#cba6f7"
+accent_alt = "#f5c2e7"
+urgent = "#f38ba8"
+workspace_active = "#a6e3a1"
