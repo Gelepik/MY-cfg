@@ -1,0 +1,342 @@
+@define-color base #181825;
+@define-color mantle #11111b;
+@define-color crust #0d0d14;
+
+@define-color text #c6c9df;
+@define-color subtext0 #9296ad;
+@define-color subtext1 #a8acc2;
+
+@define-color surface0 #252536;
+@define-color surface1 #303044;
+@define-color surface2 #3b3b52;
+
+@define-color overlay0 #5b5d73;
+@define-color overlay1 #6b6d83;
+@define-color overlay2 #7b7d93;
+
+@define-color blue #7189b8;
+@define-color lavender #8d91c7;
+@define-color sapphire #628fa8;
+@define-color sky #6fa6b5;
+@define-color teal #719f98;
+@define-color green #789c78;
+@define-color yellow #b09b6a;
+@define-color peach #b47d5d;
+@define-color maroon #9d6570;
+@define-color red #b76b78;
+@define-color mauve #c9631e;
+@define-color pink #aa7f9d;
+@define-color flamingo #b18e91;
+@define-color rosewater #b69b94;
+
+* {
+  font-family:
+    "JetBrainsMono NF",
+    "Symbols Nerd Font";
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @sapphire;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+  background-color: #3f3f3f;
+}
+#battery.charging {
+  color: @teal;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+}
+
+#battery {
+  color: @green;
+  padding: 0 10px;
+  border-radius: 15px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+window#waybar.chromium {
+  background-color: #000000;
+  border: none;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+
+#workspaces button:hover {
+  background: @crust;
+  border: @crust;
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+
+#workspaces button.empty {
+  color: @surface2;
+}
+
+#workspaces button.occupied {
+  color: @blue;   /* занятые рабочие столы */
+}
+
+#workspaces button.active {
+  color: @mauve;
+}
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+
+#image {
+  margin: 4px 0 4px 10px;
+}
+#batarry
+#clock,
+#temperature,
+#backlight,
+#wireplumber,
+#custom-pacman,
+#custom-power,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd,
+#keyboard {
+  padding: 0 6px;
+  color: @text;
+  border-radius: 15px;
+  margin: 5px 0;
+}
+
+#tray {
+  font-family: "Symbols Nerd Font", sans-serif;
+  font-size: 12px;
+  background-color: rgba(24,24,37,0.0);
+  padding: 0 3px;
+  margin: 3px;
+}
+
+#keyboard {
+  color: @mauve;
+  padding: 0 10px;
+  border-radius: 15px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+#keyboard.active {
+  background-color: @surface0;
+}
+
+#power-profiles-daemon.balanced,
+#power-profiles-daemon.power-saver {
+  margin-right: 7px;
+}
+
+#pulseaudio {
+  padding: 0 10px;
+  color: @text;
+  border-radius: 15px;
+  margin: 5px 0;
+}
+
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, reduce left margin */
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 2px;
+}
+
+#clock {
+  color: @text;                       /* цвет текста */
+  background-color: rgba(24, 24, 37, 0.94);  /* фон панели */
+  box-shadow: 0 2px 3px 1px rgba(6,6,11,0.9); /* тень */
+  border-radius: 10px;                 /* скругление углов */
+  padding: 5px 10px;                   /* внутренние отступы */
+  margin: 6.5px;                       /* внешний отступ */
+  font-weight: bolder;
+}
+
+#custom-pacman {
+  color: @peach;
+}
+
+#pulseaudio {
+  color: @mauve;
+}
+
+#pulseaudio.muted {
+  color: @surface2;
+}
+
+#custom-power {
+  color: @maroon;
+}
+
+#bluetooth {
+  margin-right: 10px;
+  font-size: 17px;
+  color: white;
+}
+
+#keyboard-state>label {
+  padding: 0 5px;
+}
+
+#keyboard-state>label.locked {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+  background-color: transparent;
+}
+.modules-left,
+.modules-center,
+.modules-right {
+  background: transparent;
+}
+
+#custom-notification {
+  color: white;
+  padding-right: 10px;
+}
+
+/* =========================
+   Отдельные блоки
+   ========================= */
+
+#image,
+#workspaces,
+#clock,
+#tray,
+#battery,
+#custom-power {
+  background-color: @crust;
+  border: 1px solid @surface0;
+  border-radius: 10px;
+  margin: 5px 3px;
+}
+
+/* Avatar */
+#image {
+  padding: 3px 7px;
+  margin-left: 5px;
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 2px 5px;
+}
+
+#workspaces button {
+  padding: 0 7px;
+  color: @surface2;
+  border-radius: 8px;
+}
+
+#workspaces button.active {
+  color: @mauve;
+  background: @surface0;
+}
+
+#workspaces button.occupied {
+  color: @blue;
+}
+
+#workspaces button:hover {
+  color: @text;
+  background: @surface1;
+}
+
+
+/* Clock */
+#clock {
+  color: @text;
+  padding: 5px 12px;
+  border-color: @mauve;
+}
+
+/* Tray */
+#tray {
+  padding: 0 8px;
+}
+
+/* Battery */
+#battery {
+  color: @green;
+  padding: 0 10px;
+}
+
+#battery.charging {
+  color: @teal;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+}
+
+/* Power */
+#custom-power {
+  color: @red;
+  padding: 0 12px;
+  border-color: @red;
+}
+#custom-cava {
+    color: @mauve;
+    background-color: @crust;
+    border: 1px solid @surface0;
+    border-radius: 10px;
+    padding: 0 12px;
+    margin: 5px 3px;
+    min-width: 120px;
+    font-size: 16px;
+}
+#custom-power:hover {
+  color: @crust;
+  background-color: @red;
+}
