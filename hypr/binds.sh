@@ -1,24 +1,25 @@
 #!/bin/bash
 
-mainMod="SUPER"  # Клавиша WIN/Meta
+mainMod="Win"  # Клавиша WIN
 
 cat <<EOF
 Hyprland Binds:
-$mainMod + Q -> Terminal (Терминал)
-$mainMod + C -> Close active window (Закрыть активное окно)
-$mainMod + E -> File manager (Файловый менеджер)
-$mainMod + R -> App menu (Меню)
-$mainMod + B -> Zen (Браузер)
-$mainMod + T -> Telegram (Телеграм)
+$mainMod + Q -> Kitty
+$mainMod + C -> Close active window
+$mainMod + E -> Yazi
+$mainMod + R -> Wofi
+$mainMod + B -> Zen 
+$mainMod + T -> Telegram
 
-$mainMod + NumPad 1 -> Steam (Стим)
+$mainMod + NumPad 1 -> Steam
 $mainMod + NumPad 2 -> Heroic Games Launcher
-$mainMod + NumPad 3 -> Osu (Осу)
-$mainMod + NumPad 5 -> Discord (Дискорд)
-
-$mainMod + D -> Toggle floating window (Переключение плавающего режима)
-$mainMod + P -> Screenshot area to clipboard (Скриншот области в буфер)
-$mainMod + F -> Fullscreen (Полноэкранный режим)
+$mainMod + NumPad 3 -> Osu
+$mainMod + NumPad 5 -> Discord
+$mainMod + = -> play/stop
+$mainMod + \ -> volume control
+$mainMod + D -> Toggle floating window 
+$mainMod + P -> Screenshot area to clipboard 
+$mainMod + F -> Fullscreen 
 EOF
 
-read -p "Press Enter to close... (Нажми Enter чтобы закрыть...)"
+read -p "Press Enter to close...
